@@ -16,6 +16,7 @@ LEFASO_SITE_URL = 'https://lefaso.net'
 LEFASO_SECTION_PATH = 'spip.php?rubrique459&debut_articles={page}#pagination_articles'
 LEFASO_ARTCILE_ATTR = {'style': 'width:100%; height:160px;margin-top:10px; margin-bottom:10px;'}
 LEFASO_PAGING_STEP = 20
+LEFASO_MIN_PAGING = 0
 LEFASO_MAX_PAGING = 1080
 LEFASO_DATE_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
 
