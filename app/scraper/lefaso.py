@@ -25,6 +25,7 @@ class LefasoNetScraper():
     _section_path: str
     _paging_step = int
     _article_attr: dict
+    _min_paging: int
     _max_paging: int
     _pages_numbering: int = 0
     _site_date_format: str
@@ -34,13 +35,15 @@ class LefasoNetScraper():
         site_url: str,
         section_path: str,
         paging_step: int,
+        min_paging: int,
         max_paging: int,
         article_attr: dict,
-        site_date_format: str
+        site_date_format: str,
     ):
         self._site_url = site_url
         self._section_path = section_path
         self._paging_step = paging_step
+        self._min_paging = min_paging
         self._max_paging = max_paging
         self._article_attr = article_attr
         self._site_date_format = site_date_format
@@ -51,7 +54,12 @@ class LefasoNetScraper():
     )
         
     async def process(self, callback):
-        for pagination in range(0, self._max_paging, self._paging_step):
+        paginations = range(
+            self._min_paging,
+            self._max_paging,
+            self._paging_step
+        )
+        for pagination in paginations:
             url = urljoin(self._site_url, self._section_path)
             url = url.format(page=pagination)
             logger.info(f"get page {url}")
