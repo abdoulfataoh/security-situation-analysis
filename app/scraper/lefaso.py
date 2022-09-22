@@ -66,9 +66,10 @@ class LefasoNetScraper():
             req = await self._request(url)
             articles = self._get_page_articles_list(req)
             for article in articles:
+                article_title = article.get('article_title')
                 article_link = article.get('article_link')
                 article_content = await self._request(article_link)
-                callback(article_content, article_link)
+                callback(article_content, article_title, article_link)
 
     async def _request(self, url: str) -> BeautifulSoup:
         async with aiohttp.ClientSession() as session:
@@ -77,24 +78,13 @@ class LefasoNetScraper():
                 soup = BeautifulSoup(html, features='html.parser')
         return soup
 
-    def _get_page_articles_list(
-        self,
-        soup_html: BeautifulSoup
-    ) -> List[Dict[str, str]]:
-        articles = []
-        for article in soup_html.findAll('div',attrs=self._article_attr):
-            content = article.select('h3 > a')[0]
-            article_title = unidecode(content.text)
-            article_link = urljoin(self._site_url, content.attrs.get('href'))
-            articles.append(
-                {
-                    'article_title': article_title,
-                    'article_link': article_link
-                }
-            )
-        return articles
     
-    def _get_article_data(self, soup_html: BeautifulSoup, article_url):
+    def _get_article_data(
+        self,
+        soup_html: BeautifulSoup,
+        article_title,
+        article_url
+    ):
 
         # article_type
         article_type = 'press'
@@ -114,12 +104,15 @@ class LefasoNetScraper():
         )
         
         # title
-        main_divs = soup_html.select('div[class="col-xs-12 col-sm-12 col-md-8 col-lg-8"]')
-        content_div = main_divs[0]
-        title = content_div.select('h3')[0].text
-        
+        title = article_title
+
         # content
-        content = ''
+        sumary_content = soup_html.select(
+            'div[class="col-xs-12 col-sm-12 col-md-8 col-lg-8"]'
+        )[0].select('h3')[0].text
+  
+        content = unidecode(sumary_content).strip()
+
         div = soup_html.findAll(
             'div',
             attrs={'class':'col-xs-12 col-sm-12 col-md-8 col-lg-8'}    
@@ -129,16 +122,50 @@ class LefasoNetScraper():
         )[0].findAll('p')
 
         for p in div:
-            content = content + '\n' + unidecode(p.text).strip()
+            content = sumary_content + '\n' + unidecode(p.text).strip()
         
         # comments
-        comments = soup_html.select(
+        comments_div = soup_html.select(
             '.comment-texte'
         )
 
-        for comment in comments:
-            print(comment.text)
-            print('----------')
-            print(article_url)
+        comments: List[str] = []
+
+        for comment in comments_div:
+            if comment != None or comment != '':
+                comments.append(
+                    unidecode(comment.text).strip()
+                )
+         
+
+        data = Article.to_json(
+            article_type='press',
+            article_title=article_title,
+            published_date=pusblished_date,
+            origin='lefaso.net',
+            url=article_url,
+            content=content,
+            comments=comments,
+        )
+        print(data)
+        exit()
+    
+    def _get_page_articles_list(
+        self,
+        soup_html: BeautifulSoup
+    ) -> List[Dict[str, str]]:
+        articles = []
+        for article in soup_html.findAll('div',attrs=self._article_attr):
+            content = article.select('h3 > a')[0]
+            article_title = unidecode(content.text)
+            article_link = urljoin(self._site_url, content.attrs.get('href'))
+            articles.append(
+                {
+                    'article_title': article_title,
+                    'article_link': article_link
+                }
+            )
+        return articles
+    
         
   
