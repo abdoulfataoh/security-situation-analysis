@@ -12,6 +12,7 @@ from unidecode import unidecode
 
 from app import settings
 from app.tremplate import Article
+from app.dataset_manager import DatasetManager
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +20,7 @@ __all__ = [
     'LefasoNetScraper',
 ]
 
+dm = DatasetManager()
 
 class LefasoNetScraper():
     _site_url: str
@@ -52,7 +54,7 @@ class LefasoNetScraper():
         asyncio.run(
             self.process(callback=self._get_article_data)
     )
-        
+   
     async def process(self, callback):
         paginations = range(
             self._min_paging,
@@ -136,7 +138,6 @@ class LefasoNetScraper():
                 comments.append(
                     unidecode(comment.text).strip()
                 )
-         
 
         data = Article.to_json(
             article_type='press',
@@ -147,9 +148,9 @@ class LefasoNetScraper():
             content=content,
             comments=comments,
         )
-        print(data)
-        exit()
-    
+
+        dm.add_record(data)
+        
     def _get_page_articles_list(
         self,
         soup_html: BeautifulSoup
@@ -166,6 +167,5 @@ class LefasoNetScraper():
                 }
             )
         return articles
-    
-        
+
   
