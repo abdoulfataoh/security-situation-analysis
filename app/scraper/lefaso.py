@@ -130,14 +130,10 @@ class LefasoNetScraper():
         except:
             logger.warning(f"we can't find <article_content> class from {article_url}")
 
-
-
-            
         # comments
         comments_div = soup_html.select(
             '.comment-texte'
         )
-
         comments: List[str] = []
 
         for comment in comments_div:
@@ -145,7 +141,8 @@ class LefasoNetScraper():
                 comments.append(
                     unidecode(comment.text).strip()
                 )
-
+        commens_number = len(comments)
+        
         data = Article.to_json(
             article_type='press',
             article_title=article_title,
@@ -153,6 +150,7 @@ class LefasoNetScraper():
             origin='lefaso.net',
             url=article_url,
             content=content,
+            commens_number = commens_number,
             comments=comments,
         )
 
@@ -174,5 +172,3 @@ class LefasoNetScraper():
                 }
             )
         return articles
-
-  
