@@ -141,8 +141,8 @@ class LefasoNetScraper():
                 comments.append(
                     unidecode(comment.text).strip()
                 )
-        commens_number = len(comments)
-        
+        comments_number = len(comments)
+
         data = Article.to_json(
             article_type='press',
             article_title=article_title,
@@ -150,7 +150,7 @@ class LefasoNetScraper():
             origin='lefaso.net',
             url=article_url,
             content=content,
-            commens_number = commens_number,
+            comments_number = comments_number,
             comments=comments,
         )
 
