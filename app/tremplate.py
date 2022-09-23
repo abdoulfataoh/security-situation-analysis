@@ -14,6 +14,7 @@ class Article:
     origin: str
     url: str
     content: str
+    comments_number: int
     comments: List[str]
     
     def __post_init__(self):

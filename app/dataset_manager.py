@@ -5,8 +5,6 @@ from pathlib import Path
 from app import settings
 
 class DatasetManager:
-    _tampon: int
-
     def __init__(self):
         ...
     
