@@ -70,6 +70,7 @@ class LefasoNetScraper():
             for article in articles:
                 article_title = article.get('article_title')
                 article_link = article.get('article_link')
+                logger.info(f"get page from {article_link}")
                 article_content = await self._request(article_link)
                 callback(article_content, article_title, article_link)
 
@@ -115,17 +116,23 @@ class LefasoNetScraper():
   
         content = unidecode(sumary_content).strip()
 
-        div = soup_html.findAll(
-            'div',
-            attrs={'class':'col-xs-12 col-sm-12 col-md-8 col-lg-8'}    
-        )[0].findAll(
-            'div',
-            attrs={'class': 'article_content'}
-        )[0].findAll('p')
+        try:
+            div = soup_html.findAll(
+                'div',
+                attrs={'class':'col-xs-12 col-sm-12 col-md-8 col-lg-8'}    
+            )[0].findAll(
+                'div',
+                attrs={'class': 'article_content'}
+            )[0].findAll('p')
 
-        for p in div:
-            content = sumary_content + '\n' + unidecode(p.text).strip()
-        
+            for p in div:
+                content = sumary_content + '\n' + unidecode(p.text).strip()
+        except:
+            logger.warning(f"we can't find <article_content> class from {article_url}")
+
+
+
+            
         # comments
         comments_div = soup_html.select(
             '.comment-texte'
