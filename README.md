@@ -11,7 +11,7 @@ We use `poetry` for virtual environment and dependencies management.
 
 # General architecture
 <p align="center">
-    <img width="300" src="https://github.com/abdoulfataoh/security-situation-analysis/blob/main/doc/architecture.png">
+    <img width="320" src="https://github.com/abdoulfataoh/security-situation-analysis/blob/main/doc/architecture.png">
 </p>
 
 
