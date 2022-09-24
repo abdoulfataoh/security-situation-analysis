@@ -10,7 +10,9 @@ We use `poetry` for virtual environment and dependencies management.
 ```poetry shell``` to enable virtual env
 
 # General architecture
-<img width="300" src="https://github.com/abdoulfataoh/security-situation-analysis/blob/main/doc/architecture.png">
+<p align="center">
+    <img width="300" src="https://github.com/abdoulfataoh/security-situation-analysis/blob/main/doc/architecture.png">
+</p>
 
 
 # Run project
