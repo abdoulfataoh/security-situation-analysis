@@ -19,4 +19,4 @@ We use `poetry` for virtual environment and dependencies management.
 
 ```python start.py``` to run scrapers
 
-```streamlit run streamlit``` to run streamlit gui with streamlit
+```streamlit run streamlit``` to run user gui with streamlit
