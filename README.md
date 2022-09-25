@@ -8,19 +8,21 @@ We use `poetry` for virtual environment and dependencies management.
 
 - To install poetry with pip
 
-  ```bash
+  ```sh
     python -m pip install poetry
   ```
 
 - To install project dependancies, run the below command from project root folder
 
-  ```bash
+  ```sh
   poetry install
   ```
 
-> Enable virtual environment
+- Enable virtual environment
 
-```poetry shell``` 
+  ```sh
+  poetry shell
+  ``` 
 
 # General architecture
 <p align="center">
