@@ -10,9 +10,8 @@ We use `poetry` for virtual environment and dependencies management.
 
 ```python -m pip install poetry```
 
-- To install project dependancies, run the below command from project root folder
-
-> ```poetry install```
+> To install project dependancies, run the below command from project root folder
+```poetry install```
 
 - Enable virtual environment
 
