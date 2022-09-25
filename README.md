@@ -12,7 +12,7 @@ We use `poetry` for virtual environment and dependencies management.
 
 - To install project dependancies, run the below command from project root folder
 
-```poetry install```
+> ```poetry install```
 
 - Enable virtual environment
 
