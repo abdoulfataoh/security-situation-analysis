@@ -6,20 +6,17 @@ In this project, we use artificial intelligence models to analyze security situa
 
 We use `poetry` for virtual environment and dependencies management.
 
-- To install poetry with pip
-
+- Install poetry with pip
   ```sh
     python -m pip install poetry
   ```
 
-- To install project dependancies, run the below command from project root folder
-
+- Install project dependancies, run the below command from project root folder
   ```sh
   poetry install
   ```
 
 - Enable virtual environment
-
   ```sh
   poetry shell
   ``` 
@@ -32,6 +29,9 @@ We use `poetry` for virtual environment and dependencies management.
 
 # Run project
 
-```python start.py``` to run scrapers
-
-```streamlit run streamlit``` to run user gui with streamlit
+- Run scrapers
+  ```sh
+  python start.py
+  ```
+- Run user gui with streamlit
+```streamlit run streamlit```
