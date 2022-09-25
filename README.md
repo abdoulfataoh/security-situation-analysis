@@ -6,7 +6,7 @@ In this project, we use artificial intelligence models to analyze security situa
 
 We use `poetry` for virtual environment and dependencies management.
 
-- To install poetry with pip
+> To install poetry with pip
 
 ```python -m pip install poetry```
 
@@ -14,7 +14,7 @@ We use `poetry` for virtual environment and dependencies management.
 
 ```poetry install```
 
-- Enable virtual environment
+> Enable virtual environment
 
 ```poetry shell``` 
 
