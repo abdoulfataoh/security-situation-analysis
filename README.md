@@ -34,4 +34,6 @@ We use `poetry` for virtual environment and dependencies management.
   python start.py
   ```
 - Run user gui with streamlit
-```streamlit run streamlit```
+  ```sh
+  streamlit run streamlit
+  ```
