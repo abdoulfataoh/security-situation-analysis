@@ -12,12 +12,17 @@ class FlaubertLargeCased(ModelBase):
 
     def __init__(self) -> None:
         loaded_tokenizer = AutoTokenizer.from_pretrained(
-            'flaubert/flaubert_large_cased'
+            'flaubert/flaubert_large_cased',
         )
         loaded_model = AutoModelForSequenceClassification.from_pretrained(
-            'DemangeJeremy/4-sentiments-with-flaubert'
+            'DemangeJeremy/4-sentiments-with-flaubert',
         )
-        self._nlp = pipeline('sentiment-analysis', model=loaded_model, tokenizer=loaded_tokenizer)
+        self._nlp = pipeline(
+            'sentiment-analysis',
+            model=loaded_model,
+            tokenizer=loaded_tokenizer,
+            truncation=True
+        )
 
     def predict(self, input_text: str) -> Any:
         return self._nlp(input_text)

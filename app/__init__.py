@@ -6,12 +6,16 @@ from app import settings
 from app.scraper import DatasetManager
 from app.scraper import LefasoNetScraper
 from app.preprocessing import extract_comments_by_article_date
+from app.models import ModelBase
 from app.models import FlaubertLargeCased
+from app.predict import comments_sentiment_prediction
 
 __all__ = [
     'lefaso_net',
     'extract_comments_by_article_date',
+    'ModelBase',
     'flaubert_large_cased',
+    'comments_sentiment_prediction',
 ]
 
 dataset_manager = DatasetManager(settings.DATASET_PATH, 1_000)
