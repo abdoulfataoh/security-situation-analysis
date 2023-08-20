@@ -8,14 +8,18 @@ from app.scraper import LefasoNetScraper
 from app.preprocessing import extract_comments_by_article_date
 from app.models import ModelBase
 from app.models import FlaubertLargeCased
+from app.models.dehatebert import Dehatebert
 from app.predict import comments_sentiment_prediction
+from app.predict import hate_comments_prediction
 
 __all__ = [
     'lefaso_net',
     'extract_comments_by_article_date',
     'ModelBase',
     'flaubert_large_cased',
+    'dehatebert',
     'comments_sentiment_prediction',
+    'hate_comments_prediction',
 ]
 
 dataset_manager = DatasetManager(settings.DATASET_PATH, 1_000)
@@ -32,3 +36,4 @@ lefaso_net = LefasoNetScraper(
 )
 
 flaubert_large_cased = FlaubertLargeCased()
+dehatebert = Dehatebert()
