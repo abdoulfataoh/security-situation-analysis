@@ -6,10 +6,12 @@ from app import settings
 from app.scraper import DatasetManager
 from app.scraper import LefasoNetScraper
 from app.preprocessing import extract_comments_by_article_date
+from app.models import FlaubertLargeCased
 
 __all__ = [
     'lefaso_net',
     'extract_comments_by_article_date',
+    'flaubert_large_cased',
 ]
 
 dataset_manager = DatasetManager(settings.DATASET_PATH, 1_000)
@@ -24,3 +26,5 @@ lefaso_net = LefasoNetScraper(
     site_date_format=settings.LEFASO_DATE_FORMAT,
     dataset_manager=dataset_manager,
 )
+
+flaubert_large_cased = FlaubertLargeCased()
