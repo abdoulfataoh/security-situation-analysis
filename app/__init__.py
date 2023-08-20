@@ -10,7 +10,7 @@ __all__ = [
     'lefaso_net',
 ]
 
-dataset_manager = DatasetManager(settings.DATASET_PATH, 10)
+dataset_manager = DatasetManager(settings.DATASET_PATH, 1_000)
 
 lefaso_net = LefasoNetScraper(
     site_url=settings.LEFASO_SITE_URL,
