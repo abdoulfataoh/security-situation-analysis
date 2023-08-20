@@ -5,9 +5,11 @@
 from app import settings
 from app.scraper import DatasetManager
 from app.scraper import LefasoNetScraper
+from app.preprocessing import extract_comments_by_article_date
 
 __all__ = [
     'lefaso_net',
+    'extract_comments_by_article_date',
 ]
 
 dataset_manager = DatasetManager(settings.DATASET_PATH, 1_000)

@@ -1,20 +1,33 @@
-# coding: utf8
+# coding: utf-8
 
-import json
 from pathlib import Path
+import json
 
-class Preprepossing:
-    _dataset_path: Path
+from unidecode import unidecode
 
-    def __init__(self, dataset_path: Path) -> None:
-        self._dataset_path = dataset_path
-    
-    def process(self):
-        with open(self._dataset_path, 'r') as file:
-            df = json.load(file)
 
-            # transforme to lowcase
-            for data in df:
-                data['article_title'] = data.
+def text_cleaner(text: str) -> str:
+    unidecode_text = unidecode(text)
+    lower_text = unidecode_text.lower()
+    text_words = lower_text.split()
+    remove_text_multispaces = ' '.join(text_words)
+    return remove_text_multispaces
 
-        
+
+def extract_comments_by_article_date(dataset_path: Path) -> list:
+    dataset: list = []
+    comments_by_article_date: list = []
+    with open(dataset_path, 'r') as file:
+        dataset = json.load(file)
+
+    for article in dataset:
+        article_date = article['published_date']
+        comments = article['comments']
+        for comment in comments:
+            comments_by_article_date.append(
+                {
+                    'article_published_date': article_date,
+                    'comment': text_cleaner(comment)
+                }
+            )
+    return comments_by_article_date
