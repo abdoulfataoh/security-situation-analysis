@@ -1,6 +1,24 @@
 # coding: utf-8
 
-from app import settings
-from app.sciences import Sciences
+# coding: utf-8
 
-sc = Sciences(str(settings.DATASET_PATH )+ '/dataset.json')
+from app import settings
+from app.scraper import DatasetManager
+from app.scraper import LefasoNetScraper
+
+__all__ = [
+    'lefaso_net',
+]
+
+dataset_manager = DatasetManager(settings.DATASET_PATH, 10)
+
+lefaso_net = LefasoNetScraper(
+    site_url=settings.LEFASO_SITE_URL,
+    section_path=settings.LEFASO_SECTION_PATH,
+    paging_step=settings.LEFASO_PAGING_STEP,
+    min_paging=settings.LEFASO_MIN_PAGING,
+    max_paging=settings.LEFASO_MAX_PAGING,
+    article_attr=settings.LEFASO_ARTCILE_ATTR,
+    site_date_format=settings.LEFASO_DATE_FORMAT,
+    dataset_manager=dataset_manager,
+)

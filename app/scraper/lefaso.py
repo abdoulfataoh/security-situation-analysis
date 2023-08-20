@@ -17,11 +17,6 @@ from app.template import Article
 
 logger = logging.getLogger(__name__)
 
-__all__ = [
-    'LefasoNetScraper',
-    'DatasetManager',
-]
-
 
 class DatasetManager:
 
@@ -48,12 +43,13 @@ class DatasetManager:
         self._buffer.append(record)
         self._buffer_records_counter += 1
         if self._buffer_records_counter > self._buffer_size:
-            current_data: list = []
+            data: list = []
+            updated_data: list = []
             with open(self._dataset_path, 'r', encoding='utf-8') as file:
-                current_data = json.load(file)
+                data = json.load(file)
+                data.extend(self._buffer)
             with open(self._dataset_path, 'w', encoding='utf-8') as file:
-                updated_data = current_data.extend(self._buffer)
-                json.dump(updated_data, file, ensure_ascii=False, indent=2)
+                json.dump(data, file, ensure_ascii=False, indent=2)
                 self._buffer = []
                 self._buffer_records_counter = 0
         return True

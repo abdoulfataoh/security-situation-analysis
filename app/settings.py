@@ -9,7 +9,7 @@ DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 # [PATH Config]
 ASSETS_PATH = Path(r'assets')
-DATASET_PATH = ASSETS_PATH / 'dataset'
+DATASET_PATH = ASSETS_PATH / 'dataset/dataset.json'
 
 # [LEFASO.NET Config]
 LEFASO_SITE_URL = 'https://lefaso.net'
