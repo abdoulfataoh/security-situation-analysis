@@ -16,12 +16,12 @@ comments_by_article_date = extract_comments_by_article_date(
     settings.DATASET_PATH
 )
 
-an_comments_by_article_date = comments_sentiment_prediction(
+an_comments_by_article_date = hate_comments_prediction(
     comments=comments_by_article_date,
-    model=flaubert_large_cased
+    model=dehatebert
 )
 
-an_comments_by_article_date = hate_comments_prediction(
+an_comments_by_article_date = comments_sentiment_prediction(
     comments=comments_by_article_date,
     model=flaubert_large_cased
 )
